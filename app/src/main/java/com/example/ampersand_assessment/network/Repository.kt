@@ -10,14 +10,15 @@ class Repository {
 
     init {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://your_api_base_url/") // Replace with your API base URL
+            .baseUrl("https://jsonplaceholder.typicode.com/") // Replace with your API base URL
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         apiService = retrofit.create(ApiService::class.java)
     }
 
-    fun getItems(): Call<List<Item>> {
-        return apiService.getItems()
+    suspend fun getItems(): List<Item> {
+        // Make a network call and return the list of items
+        return apiService.getItems() // Ensure that your ApiService returns a List<Item>
     }
 }

@@ -4,6 +4,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("your_endpoint_here") // Replace with your API endpoint
-    fun getItems(): Call<List<Item>>
+    @GET("posts")
+    suspend fun getItems(): List<Item>
 }
