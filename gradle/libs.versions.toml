@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+constraintlayoutCompose = "1.0.1"
 kotlin = "2.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -19,6 +20,7 @@ navigationRuntimeKtx = "2.8.1"
 navigationCompose = "2.8.1"
 
 [libraries]
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "composeCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
