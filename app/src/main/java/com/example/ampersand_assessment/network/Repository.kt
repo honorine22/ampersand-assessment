@@ -1,5 +1,6 @@
 package com.example.ampersand_assessment.network
 
+import android.util.Log
 import com.example.ampersand_assessment.model.Item
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,6 +20,11 @@ class Repository {
 
     suspend fun getItems(): List<Item> {
         // Make a network call and return the list of items
-        return apiService.getItems() // Ensure that your ApiService returns a List<Item>
+        return try {
+            apiService.getItems() // Make sure this method returns a valid list
+        } catch (e: Exception) {
+            Log.e("Repository", "Error fetching items: ${e.message}")
+            emptyList()  // Return an empty list in case of an error
+        }
     }
 }
