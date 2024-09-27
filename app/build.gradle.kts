@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     // ViewModel and LiveData
     implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.livedata)
     // ConstraintLayout (for supporting tablet layouts)
     implementation(libs.androidx.constraintlayout)
