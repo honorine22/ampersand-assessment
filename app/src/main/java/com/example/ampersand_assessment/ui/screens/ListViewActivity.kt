@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ampersand_assessment.R
 import com.example.ampersand_assessment.viewmodel.MainViewModel
 
-class ListActivity : AppCompatActivity() {
+class ListViewActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
     private lateinit var itemAdapter: ItemAdapter
