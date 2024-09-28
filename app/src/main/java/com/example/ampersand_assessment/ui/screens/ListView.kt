@@ -38,112 +38,95 @@ fun ListView(
     isLoading: Boolean,
     errorMessage: String?
 ) {
-    ConstraintLayout(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        val (container) = createRefs()
-
-        // This container will be positioned at the top of the screen
-        Box(
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .constrainAs(container) {
-                    top.linkTo(parent.top) // Ensures the container touches the top
-                }
-                .padding(16.dp)
+                .fillMaxSize()
+                .background(LightBackground)
+                .padding(0.dp) // Remove any unnecessary padding
+                .systemBarsPadding()
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(LightBackground)
-                    .padding(0.dp) // Remove any unnecessary padding
-                    .systemBarsPadding()
-            ) {
-                when {
-                    isLoading -> {
-                        // Show a loading spinner
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            CircularProgressIndicator()
-                        }
+            when {
+                isLoading -> {
+                    // Show a loading spinner
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
                     }
+                }
 
-                    errorMessage != null -> {
-                        // Show the error message
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = errorMessage ?: "An unknown error occurred",
-                                color = MaterialTheme.colorScheme.error,
-                                style = MaterialTheme.typography.bodyLarge,
-                                textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(16.dp)
-                            )
-                        }
+                errorMessage != null -> {
+                    // Show the error message
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = errorMessage ?: "An unknown error occurred",
+                            color = MaterialTheme.colorScheme.error,
+                            style = MaterialTheme.typography.bodyLarge,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(16.dp)
+                        )
                     }
+                }
 
-                    items.isEmpty() -> {
-                        // Show a message if the items list is empty or null
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(text = "No items found")
-                        }
+                items.isEmpty() -> {
+                    // Show a message if the items list is empty or null
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "No items found")
                     }
+                }
 
-                    else -> {
-                        // Show the list of items once data is loaded
-                        LazyColumn {
-                            items(items.size) { index ->
-                                val item = items[index]
+                else -> {
+                    // Show the list of items once data is loaded
+                    LazyColumn {
+                        items(items.size) { index ->
+                            val item = items[index]
 
-                                ListItem(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .clickable {
-                                            navController.navigate("details/${item.id}")
-                                        }
-                                        .background(AccentColor)
-                                        .padding(12.dp),
-                                    headlineContent = {
-                                        Text(
-                                            text = item.title,
-                                            style = MaterialTheme.typography.titleLarge,
-                                            color = TextPrimary
-                                        )
-                                    },
-                                    supportingContent = {
-                                        Column(
-                                            horizontalAlignment = Alignment.Start,
-                                            verticalArrangement = Arrangement.Bottom,
-                                            modifier = Modifier.padding(0.dp, 10.dp)
-                                        ) {
-                                            Text(
-                                                text = item.body,
-                                                style = MaterialTheme.typography.bodyMedium,
-                                                color = Color.Black
-                                            )
-                                            IconButton(onClick = { navController.navigate("details/${item.id}") }) {
-                                                Icon(
-                                                    Icons.Default.ArrowForward,
-                                                    tint = TextPrimary,
-                                                    contentDescription = "View Details"
-                                                )
-                                            }
-                                        }
-
+                            ListItem(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        navController.navigate("details/${item.id}")
                                     }
-                                )
-                            }
+                                    .background(AccentColor)
+                                    .padding(12.dp),
+                                headlineContent = {
+                                    Text(
+                                        text = item.title,
+                                        style = MaterialTheme.typography.titleLarge,
+                                        color = TextPrimary
+                                    )
+                                },
+                                supportingContent = {
+                                    Column(
+                                        horizontalAlignment = Alignment.Start,
+                                        verticalArrangement = Arrangement.Bottom,
+                                        modifier = Modifier.padding(0.dp, 10.dp)
+                                    ) {                                        Text(
+                                            text = item.body,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = Color.Black
+                                        )
+                                        IconButton(onClick = { navController.navigate("details/${item.id}") }) {
+                                            Icon(
+                                                Icons.Default.ArrowForward,
+                                                tint = TextPrimary,
+                                                contentDescription = "View Details"
+                                            )
+                                        }
+                                    }
+
+                                }
+                            )
                         }
                     }
                 }
             }
         }
-    }
 }

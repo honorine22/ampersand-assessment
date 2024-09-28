@@ -20,12 +20,6 @@ class MainActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
                     val viewModel: MainViewModel = remember { MainViewModel() }
-
-                    // Trigger data fetching
-                    LaunchedEffect(Unit) {
-                        viewModel.fetchData()
-                    }
-
                     // Pass the navController and viewModel to the AppNavHost
                     AppNavHost(navController = navController, viewModel = viewModel)
                 }

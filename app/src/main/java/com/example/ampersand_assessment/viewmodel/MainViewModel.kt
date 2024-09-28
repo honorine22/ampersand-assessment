@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.ampersand_assessment.network.Repository
 import com.example.ampersand_assessment.model.Item
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
@@ -21,7 +23,11 @@ class MainViewModel : ViewModel() {
     private val _loading = MutableStateFlow(true)
     val loading: StateFlow<Boolean> = _loading
 
-    fun fetchData() {
+    init {
+        fetchData()
+    }
+
+    private fun fetchData() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _loading.value = true
@@ -42,6 +48,13 @@ class MainViewModel : ViewModel() {
                 _loading.value = false // Stop loading
             }
 
+        }
+    }
+
+    // Fetch item by ID
+    fun getItemById(id: Int): Flow<Item?> {
+        return items.map { itemList ->
+            itemList.firstOrNull { it.id == id }
         }
     }
 }
