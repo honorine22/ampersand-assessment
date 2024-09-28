@@ -27,4 +27,15 @@ class Repository {
             emptyList()  // Return an empty list in case of an error
         }
     }
+
+
+    // Implement the method to fetch a single item by ID
+    suspend fun getItemById(id: Int): Item? {
+        return try {
+            apiService.getItemById(id) // Fetch the item from the API
+        } catch (e: Exception) {
+            Log.e("Repository", "Error fetching item by ID: ${e.message}")
+            null  // Return null in case of an error
+        }
+    }
 }
