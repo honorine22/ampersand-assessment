@@ -10,9 +10,9 @@ import com.example.ampersand_assessment.ui.screens.DetailsView
 import com.example.ampersand_assessment.ui.screens.ListView
 import com.example.ampersand_assessment.viewmodel.MainViewModel
 
-@SuppressLint("StateFlowValueCalledInComposition")
-@Composable
-fun AppNavHost(navController: NavHostController, viewModel: MainViewModel) {
+//@SuppressLint("StateFlowValueCalledInComposition")
+//@Composable
+//fun AppNavHost(navController: NavHostController, viewModel: MainViewModel) {
     // Create a navigation host
 //    NavHost(navController = navController, startDestination = "list") {
 //        // List screen
@@ -41,4 +41,4 @@ fun AppNavHost(navController: NavHostController, viewModel: MainViewModel) {
 //            }
 //        }
 //    }
-}
+//}

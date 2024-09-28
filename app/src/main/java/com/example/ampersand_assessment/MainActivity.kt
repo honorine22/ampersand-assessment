@@ -2,32 +2,18 @@ package com.example.ampersand_assessment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
-import androidx.navigation.compose.rememberNavController
-import com.example.ampersand_assessment.ui.AppNavHost
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.example.ampersand_assessment.ui.screens.ListViewActivity
-import com.example.ampersand_assessment.ui.theme.AmpersandassessmentTheme
-import com.example.ampersand_assessment.viewmodel.MainViewModel
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContent {
-//            AmpersandassessmentTheme {
-//                Surface(color = MaterialTheme.colorScheme.background) {
-//                    val navController = rememberNavController()
-//                    val viewModel: MainViewModel = remember { MainViewModel() }
-//                    // Pass the navController and viewModel to the AppNavHost
-//                    AppNavHost(navController = navController, viewModel = viewModel)
-//                }
-//            }
-//        }
-        val intent = Intent(this, ListViewActivity::class.java)
-        startActivity(intent)
+        setContentView(R.layout.activity_main)
+        val openListViewButton: AppCompatButton = findViewById(R.id.button_open_list_view)
+        openListViewButton.setOnClickListener {
+            val intent = Intent(this, ListViewActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

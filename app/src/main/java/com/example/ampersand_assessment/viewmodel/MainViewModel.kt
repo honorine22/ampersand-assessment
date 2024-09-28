@@ -16,17 +16,29 @@ class MainViewModel : ViewModel() {
     private val _items = MutableLiveData<List<Item>>(emptyList())
     val items: LiveData<List<Item>> get() = _items
 
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> get() = _errorMessage
+
+    private val _loading = MutableLiveData<Boolean>(true)
+    val loading: LiveData<Boolean> get() = _loading
+
+
     init {
         fetchData()
     }
 
     private fun fetchData() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
+            _loading.value = true
             try {
-                val fetchedItems = repository.getItems() // Make sure this returns List<Item>
-                _items.postValue(fetchedItems)
+                val fetchedItems = repository.getItems()
+                _items.value = fetchedItems
+                _errorMessage.value = null
             } catch (e: Exception) {
-                _items.postValue(emptyList())
+                _errorMessage.value = "Error fetching data: ${e.message}"
+                _items.value = emptyList()
+            } finally {
+                _loading.value = false
             }
         }
     }
